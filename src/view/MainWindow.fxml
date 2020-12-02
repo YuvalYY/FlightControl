@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import view.JoystickDisplayer?>
+<?import view.MapDisplayer?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.211" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainWindowController">
+   <center>
+      <HBox BorderPane.alignment="CENTER">
+         <children>
+            <VBox>
+               <children>
+                  <HBox>
+                     <children>
+                        <Button maxHeight="1.7976931348623157E308" mnemonicParsing="false" text="Connect" onMouseClicked="#onConnectPress">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" text="Load data" onMouseClicked="#onLoadDataPress">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" text="Calculate path" onMouseClicked="#onCalculatePathPress">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Button>
+                        
+                     </children>
+                     <VBox.margin>
+                     	<Insets />
+                     </VBox.margin>
+                  </HBox>
+                  <MapDisplayer fx:id="mMapDisplayer" height="330.0" width="412.0" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </VBox>
+            <VBox alignment="TOP_CENTER">
+               <children>
+                  <RadioButton mnemonicParsing="false" selected="true" text="Autopilot" toggleGroup="$tGroup">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="tGroup" />
+                     </toggleGroup>
+                     <padding>
+                        <Insets bottom="10.0" />
+                     </padding>
+                  </RadioButton>
+                  <TextArea id="TextCode" maxHeight="1.7976931348623157E308" prefHeight="328.0" prefWidth="388.0">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </TextArea>
+               </children>
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="CENTER">
+               <children>
+                  <RadioButton mnemonicParsing="false" text="Manual" toggleGroup="$tGroup">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <padding>
+                        <Insets bottom="10.0" />
+                     </padding>
+                  </RadioButton>
+                  <GridPane prefHeight="331.0" prefWidth="352.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="101.60009765625" minWidth="10.0" prefWidth="29.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="109.0" minWidth="0.0" prefWidth="39.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="301.0" minWidth="10.0" prefWidth="242.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="275.19997868537905" minWidth="10.0" prefWidth="43.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="330.8" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="330.8" minHeight="10.0" prefHeight="258.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="159.00000610351563" minHeight="0.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="159.00000610351563" minHeight="0.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Slider fx:id="mThrottleSlider" value="1" blockIncrement="0.05" max="1" min="0" orientation="VERTICAL" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Slider fx:id="mRudderSlider" blockIncrement="0.05" max="1.0" min="-1.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                        <Text rotate="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="throttle" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="rudder" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;- aileron -&gt;" GridPane.columnIndex="2" GridPane.halignment="CENTER" />                        
+                        <JoystickDisplayer fx:id="mJoystickDisplayer" height="256.0" width="243.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <Text strokeType="OUTSIDE" rotate="90.0" strokeWidth="0.0" text="&lt;- elevator -&gt;" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.halignment="CENTER" />
+                     </children>
+                  </GridPane>
+               </children>
+            </VBox>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="30.0" />
+         </BorderPane.margin>
+         <padding>
+            <Insets right="4.0" />
+         </padding>
+      </HBox>
+   </center>
+</BorderPane>
